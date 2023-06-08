@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -50,6 +51,7 @@ class AuthRepo {
         AppConstants.LOGIN_URI,
         data: loginBody.toJson(),
       );
+
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

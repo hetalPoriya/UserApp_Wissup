@@ -28,31 +28,35 @@ class _BottomCartViewState extends State<BottomCartView> {
 
     super.initState();
 
-    if(widget.product != null && widget.product.seller.shop.vacationEndDate != null){
-      DateTime vacationDate = DateTime.parse(widget.product.seller.shop.vacationEndDate);
-      DateTime vacationStartDate = DateTime.parse(widget.product.seller.shop.vacationStartDate);
-      final today = DateTime.now();
-      final difference = vacationDate.difference(today).inDays;
-      final startDate = vacationStartDate.difference(today).inDays;
+    if(widget.product != null){
+      if(widget.product.seller != null){
 
-      if(difference >= 0 && widget.product.seller.shop.vacationStatus == 1 && startDate <= 0){
-        vacationIsOn = true;
+        if(widget.product.seller.shop.vacationEndDate != null){
+          DateTime vacationDate = DateTime.parse(widget.product.seller.shop.vacationEndDate);
+          DateTime vacationStartDate = DateTime.parse(widget.product.seller.shop.vacationStartDate);
+          final today = DateTime.now();
+          final difference = vacationDate.difference(today).inDays;
+          final startDate = vacationStartDate.difference(today).inDays;
+
+          if(difference >= 0 && widget.product.seller.shop.vacationStatus == 1 && startDate <= 0){
+            vacationIsOn = true;
+          }
+        }
+
+
+        else{
+          vacationIsOn = false;
+        }
       }
 
-      else{
-        vacationIsOn = false;
-      }
+
     }
   }
 
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
-    return Container(
+  return Container(
       height: 60,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
